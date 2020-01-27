@@ -1,10 +1,10 @@
+import M from "materialize-css/dist/js/materialize.min.js";
 import React from "react";
 import { connect } from "react-redux";
-import M from "materialize-css/dist/js/materialize.min.js";
+import { getBooks } from "./Actions";
 import "./App.css";
 import Book from "./components/Card";
 import Header from "./components/Header";
-import { getBooks } from "./Actions";
 
 function BookList({ books }) {
   return books.map((i, idx) => <Book book={i} key={idx} />);
@@ -37,9 +37,7 @@ class App extends React.Component {
     let elem = document.getElementById("category");
     let instance = M.FormSelect.getInstance(elem);
     let values = instance.getSelectedValues();
-    let filtered_books = this.props.books.filter(i =>
-      values.includes(i.category)
-    );
+    let filtered_books = this.props.books.filter(i => values.includes(i.category));
     console.log(filtered_books);
     this.setState({ list: filtered_books });
   };
@@ -47,9 +45,7 @@ class App extends React.Component {
   handlePriceChange = e => {
     this.setState({ price: e.target.value });
 
-    let filtered_books = this.props.books.filter(
-      i => i.price < e.target.value - 50 && i.price < e.target.value + 50
-    );
+    let filtered_books = this.props.books.filter(i => i.price < e.target.value - 50 && i.price < e.target.value + 50);
     console.log(filtered_books);
     this.setState({ list: filtered_books });
   };
@@ -58,13 +54,13 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <div className="row">
-          <div className="col s2">
-            <h5>Filter Products</h5>
+        <div className='row'>
+          <div className='col s12 m2 l2'>
+            <h6>Filter Products</h6>
             {this.props.options ? (
               <div>
                 <label>Categories</label>
-                <select id="category" multiple onChange={this.handleSelect}>
+                <select id='category' multiple onChange={this.handleSelect}>
                   <option disabled selected>
                     choose your category
                   </option>
@@ -76,23 +72,16 @@ class App extends React.Component {
                 </select>
               </div>
             ) : null}
-            <form action="#">
+            <form action='#'>
               <label>Price</label>
 
-              <p class="range-field">
-                <input
-                  value={this.state.price}
-                  type="range"
-                  id="test5"
-                  min="800"
-                  max="1200"
-                  onChange={this.handlePriceChange}
-                />
+              <p class='range-field'>
+                <input value={this.state.price} type='range' id='test5' min='800' max='1200' onChange={this.handlePriceChange} />
               </p>
             </form>
           </div>
           {this.state.list ? (
-            <div className="col s10">
+            <div className='col s12 s10 l10'>
               <h5>{String(this.state.list.length)} book found</h5>
               <BookList books={this.state.list} />
             </div>
@@ -110,7 +99,4 @@ function mapStateToProps({ books }) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { getBooks: getBooks }
-)(App);
+export default connect(mapStateToProps, { getBooks: getBooks })(App);
