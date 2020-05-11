@@ -13,9 +13,9 @@ function CheckOutView({ submitOrder }) {
   return (
     <div>
       CheckOut
-      <input name='Name' placeholder='Customer Name' value={name} onChange={e => setName(e.target.value)} />
-      <input name='Phone' placeholder='Phone Number' value={phone} onChange={e => setPhone(e.target.value)} />
-      <textarea name='Address' class='materialize-textarea' value={address} placeholder='address' onChange={e => setAddress(e.target.value)} />
+      <input name='Name' placeholder='Customer Name' value={name} onChange={(e) => setName(e.target.value)} />
+      <input name='Phone' placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)} />
+      <textarea name='Address' class='materialize-textarea' value={address} placeholder='address' onChange={(e) => setAddress(e.target.value)} />
       <button className='btn' onClick={() => submitOrder(name, phone, address)}>
         Submit{" "}
       </button>
@@ -27,13 +27,13 @@ function Header({ cart, removeFromCart }) {
   const [open, setOpen] = useState(false);
   const [CheckOut, setCheckOut] = useState(false);
 
-  const values = cart.map(i => i.price);
+  const values = cart.map((i) => i.price);
 
-  const sum = values.reduce(function(accumulator, currentValue) {
+  const sum = values.reduce(function (accumulator, currentValue) {
     return accumulator + currentValue;
   }, 0);
 
-  const handleRemove = item => {
+  const handleRemove = (item) => {
     removeFromCart(item);
   };
 
@@ -47,7 +47,7 @@ function Header({ cart, removeFromCart }) {
         address,
         cart,
         sum,
-        time: Date.now()
+        time: Date.now(),
       };
       console.log(payload);
 
@@ -62,13 +62,22 @@ function Header({ cart, removeFromCart }) {
   return (
     <div class='navbar-fixed'>
       <nav>
-        <div className='nav-wrapper blue lighten-2'>
-          <a href='#' className='' style={{ margin: "0px 10px" }}>
+        <div className='nav-wrapper blue-grey lighten-3'>
+          <a href='#' className='' style={{ margin: "0px 10px", color: "#111" }}>
             Foreign Books BD
           </a>
+
           <ul id='nav-mobile' className='right'>
             <li>
+              <a href='sass.html'>
+                {" "}
+                <i class='material-icons'>add_shopping_cart</i>
+              </a>
+            </li>
+
+            <li>
               <a
+                style={{ color: "#111" }}
                 href='#'
                 onClick={() => {
                   setOpen(true);
@@ -92,7 +101,7 @@ function Header({ cart, removeFromCart }) {
         onBlur={() => setOpen(false)}
       >
         <div>
-          {cart.map(item => (
+          {cart.map((item) => (
             <ul class='collection'>
               <li class='collection-item avatar'>
                 <img src={item.book_image} alt='' class='circle' />
@@ -132,7 +141,7 @@ function Header({ cart, removeFromCart }) {
 
 function mapStateToProps({ cart }) {
   return {
-    cart: cart.cart
+    cart: cart.cart,
   };
 }
 

@@ -10,3 +10,8 @@ body {
 .slide-pane__overlay {
   z-index: 100;
 }
+
+.slider {
+  background-color: #efefef;
+  /* height: 50vh !important; */
+}

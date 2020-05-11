@@ -15,14 +15,12 @@ function Book({ book, cart, AddItemToCart }) {
   const addToCart = () => {
     let { author, title, book_image, price } = book;
     let item = { author, title, book_image, price };
-    console.log(item);
     AddItemToCart(item);
     M.toast({ html: " item added!" });
   };
 
   return (
     <div className='col s12 m6' onMouseEnter={showCart} onMouseLeave={hideCart} style={{ position: "relative" }}>
-      {console.log(cart)}
       <div className='card horizontal small'>
         <div className='card-image'>
           <img src={book.book_image} />{" "}
@@ -46,7 +44,7 @@ function Book({ book, cart, AddItemToCart }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
             onClick={addToCart}
           >
@@ -60,7 +58,7 @@ function Book({ book, cart, AddItemToCart }) {
 
 function mapStateToProps({ cart }) {
   return {
-    cart: cart.cart
+    cart: cart.cart,
   };
 }
 
